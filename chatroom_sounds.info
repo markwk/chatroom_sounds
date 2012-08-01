@@ -1,0 +1,5 @@
+name = Chat Room Sounds
+description = Adds sound notification on messages.
+package = Chat
+core = 7.x
+dependencies[] = chatroom
