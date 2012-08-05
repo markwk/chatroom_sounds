@@ -1,12 +1,11 @@
 (function ($) {
+    Drupal.Nodejs.callbacks.chatroomSoundsPlaySound = {
+        callback: function (message) {
+            document.getElementById('notification_sound').play();
+        }
+    };
     
     $(document).ready(function(){
-        
-        Drupal.chatroom.play_normal_sound = function (message){
-        if(Drupal.settings.chatroom.sound & Drupal.settings.chatroom.uid !=message.uid)
-            document.getElementById('notification_sound').play();
-    }
-        
         $('#chatroom-sound-on-off-button').click(function (e) {           
             e.preventDefault();
             e.stopPropagation();

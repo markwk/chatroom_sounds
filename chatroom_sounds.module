@@ -22,18 +22,17 @@ function chatroom_sounds_form_chatroom_irc_buttons_form_alter(&$form, $form_stat
   drupal_add_js(array('chatroom' => array('sound' => true, 'uid' => $user->uid)), 'setting');
 }
 
-function chatroom_sounds_chatroom_push_msg_alter(&$push_message, &$context) {
-  $push_message->data['addtional_actions'][] = 'play_normal_sound';
+function chatroom_sounds_nodejs_content_channel_message_alter(&$message){
+  if(is_string($message->callback)){
+    $message->callback = array($message->callback, 'chatroomSoundsPlaySound' );
+  }else{
+    $message->callback[] = 'chatroomSoundsPlaySound';
+  }
 }
-//function chatroom_sounds_chatroom_push_msg_alter(&$message){
-//  print 'asdas';
-//  var_dump($message); exit;
-//  
-//}
+
 /*
  * hook_menu implemenataion 
  */
-
 function chatroom_sounds_menu() {
   $items = array();
   $items['admin/config/chatroom_sounds'] = array(
