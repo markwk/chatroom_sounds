@@ -23,10 +23,13 @@ function chatroom_sounds_form_chatroom_irc_buttons_form_alter(&$form, $form_stat
 }
 
 function chatroom_sounds_nodejs_content_channel_message_alter(&$message){
+  // check for propper callback
   if(is_string($message->callback)){
-    $message->callback = array($message->callback, 'chatroomSoundsPlaySound' );
+    if($message->callback == 'chatroomMessageHandler')
+      $message->callback = array($message->callback, 'chatroomSoundsPlaySound' );        
   }else{
-    $message->callback[] = 'chatroomSoundsPlaySound';
+    if(in_array('chatroomMessageHandler', $message->callback))
+      $message->callback[] = 'chatroomSoundsPlaySound';    
   }
 }
 

@@ -1,7 +1,8 @@
 (function ($) {
     Drupal.Nodejs.callbacks.chatroomSoundsPlaySound = {
         callback: function (message) {
-            document.getElementById('notification_sound').play();
+            if(Drupal.settings.chatroom.uid != message.data.uid)
+                document.getElementById('notification_sound').play();
         }
     };
     
